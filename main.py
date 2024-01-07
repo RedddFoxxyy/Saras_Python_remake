@@ -1,12 +1,13 @@
 import pygame
-
 pygame.init()
 
-screen = pygame.display.set_mode((750, 750))
+screen_size = 750
+screen = pygame.display.set_mode((screen_size, screen_size))
 screen.fill("black")
 pygame.display.set_caption("SARAS")
 clock = pygame.time.Clock()
 
+# maze data
 maze_size = 25
 cell_size = 30
 maze = [
@@ -42,7 +43,20 @@ x = 60
 y = 30
 size_s = 30
 velocity = 30
+sprite_texture = pygame.image.load_extended("assets/suyog.jpg").convert_alpha()
+scaled_sprite = pygame.transform.scale(sprite_texture, (size_s, size_s))
+sprite = pygame.Surface((size_s, size_s))
+sprite.blit(scaled_sprite, (0, 0))
 
+# startscreen data
+startscreen_texture = pygame.image.load_extended("assets/startscreen.jpg").convert_alpha()
+scaled_startscreen = pygame.transform.scale(startscreen_texture, (screen_size, screen_size))
+startscreen = pygame.Surface((screen_size, screen_size))
+startscreen.blit(scaled_startscreen, (0, 0))
+
+# beginning of the game loop
+screen.blit(startscreen, (0, 0))
+pygame.display.flip()
 done = True
 while done:
     for event in pygame.event.get():
@@ -69,6 +83,6 @@ while done:
                 wall_x = col * cell_size
                 wall_y = row * cell_size
                 pygame.draw.rect(screen, (80, 160, 250), (wall_x, wall_y, cell_size, cell_size))
-    pygame.draw.rect(screen, "white", (x, y, size_s, size_s))
+    screen.blit(sprite, (x, y))
     pygame.display.flip()
-    clock.tick(15)
+    clock.tick(30)
