@@ -71,4 +71,4 @@ while done:
                 pygame.draw.rect(screen, (80, 160, 250), (wall_x, wall_y, cell_size, cell_size))
     pygame.draw.rect(screen, "white", (x, y, size_s, size_s))
     pygame.display.flip()
-    clock.tick(24)
+    clock.tick(15)
